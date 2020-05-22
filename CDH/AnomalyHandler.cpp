@@ -6,12 +6,13 @@
 #include "utility.h"
 #include "TimeManager.h"
 #include "UVC_app.h"
+#include "AQU_Anomaly_handler.h"
 #include "BlockCommandDefinisions.h"
 #include "PacketHandler.h"
 #include "cmd_analyze_obc.h"
 
 static AHInfo ahi_;
-const AHInfo *ahi;
+const AHInfo* ahi;
 
 static size_t prev_pos_;
 static size_t prev_act_;
@@ -24,7 +25,7 @@ static int is_equal_code_(const AnomalyCode* a,
 	const AnomalyCode* b);
 static void respond_to_anomaly_(size_t id);
 static void add_rule_(size_t id,
-	const AHRule *ahr);
+	const AHRule* ahr);
 static void AH_clear_log_(void);
 
 AppInfo AH_create_app(void)
@@ -38,7 +39,7 @@ static void AH_init_(void)
 
 	ahi = &ahi_;
 	// 初期設定はすべてのルールを無効化する
-	for (i = 0; i<AH_MAX_RULES; ++i) { ahi_.elements[i].is_active = 0; }
+	for (i = 0; i < AH_MAX_RULES; ++i) { ahi_.elements[i].is_active = 0; }
 	// デフォルトのルール構成を読み込み
 	load_default_rules_();
 	// 対応時刻をゼロクリア
@@ -55,7 +56,7 @@ static void AH_init_(void)
 
 static void load_default_rules_(void)
 {
-	
+	int i;
 	AHRule ahr;
 
 	// Under Voltage Control Lv.1
@@ -88,6 +89,17 @@ static void load_default_rules_(void)
 	add_rule_(2, &ahr);
 	ahi_.elements[2].is_active = 1;
 
+	//AQU Anomaly
+	for (i = 0; i < 20; i++)
+	{
+		ahr.code.group = AL_AQU;
+		ahr.code.local = AQU_ANM_01 + i;
+		ahr.cond = AH_SINGLE;
+		ahr.threshold = 0;
+		ahr.bc_id = BC_AQU_AN_ACTION;
+		add_rule_(3 + i, &ahr);
+		ahi_.elements[3 + i].is_active = 1;
+	}
 }
 
 static void AH_exec_(void)
@@ -98,7 +110,7 @@ static void AH_exec_(void)
 	else if (ahi_.al_pointer.count < al->counter)
 	{
 		size_t record_id;
-		for (record_id = ahi_.al_pointer.pos; record_id<al->header; ++record_id)
+		for (record_id = ahi_.al_pointer.pos; record_id < al->header; ++record_id)
 		{
 			size_t id = check_rules_(record_id);
 			if (id != AH_MAX_RULES) { respond_to_anomaly_(id); }
@@ -121,7 +133,7 @@ static size_t check_rules_(size_t record_id)
 	int is_latest = (record_id == al->header);
 	size_t id;
 	// 全ルールを順次走査
-	for (id = 0; id<AH_MAX_RULES; ++id)
+	for (id = 0; id < AH_MAX_RULES; ++id)
 	{
 		AHElement ahe = ahi_.elements[id];
 		// ルールが無効の場合はスキップ
@@ -234,7 +246,7 @@ int Cmd_AH_register_rule(const CTCP* packet)
 }
 
 static void add_rule_(size_t id,
-	const AHRule *ahr)
+	const AHRule* ahr)
 {
 	ahi_.elements[id].is_active = 0; // 登録時点では無効とする
 	ahi_.elements[id].rule = *ahr;

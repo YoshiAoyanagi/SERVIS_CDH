@@ -232,8 +232,12 @@ void STRX_OTC_Detect(void)
 	CTCP packet;
 	unsigned char param = (unsigned char)PWR_OFF;
 
-	unsigned char tmp = (unsigned char)(strx_sts.tempe - 100);
-	if (strx_otc_enable && tmp > strx_otc_threshold)
+	short tmp = strx_sts.tempe - 100;
+
+	if (tmp < 0)	//0degC‚æ‚è‚‚¯‚ê‚Îreturn
+		return;
+
+	if (strx_otc_enable && (unsigned char)tmp > strx_otc_threshold)
 	{
 		otc_count++;
 		if (otc_count > STRX_OTC_THR_COUNT)

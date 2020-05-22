@@ -23,9 +23,6 @@ ack Serial_DataReceive(FOWARD_PORT port, unsigned char *data, int *len) {
 			case PORT_DATA:		i_ret = DATA_Serial.available(); break;
 			case PORT_STRX:		i_ret = STRX_Serial.available(); break;
 			case PORT_ADCS:		i_ret = ADCS_Serial.available(); break;
-			case PORT_SF:		i_ret = MSN_Serial.available(); break;
-			case PORT_SUBCAM:	i_ret = MSN_Serial.available(); ; break;
-			case PORT_AQU:		i_ret = MSN_Serial.available(); break;
 			case PORT_MSN:		i_ret = MSN_Serial.available(); break;
 			case PORT_DBG:		i_ret = DEBUG_Serial.available(); break;
 			default:			break;
@@ -50,9 +47,6 @@ ack Serial_DataReceive(FOWARD_PORT port, unsigned char *data, int *len) {
 				case PORT_DATA:		data[receive_size] = DATA_Serial.read(); break;// Serial.print(data[receive_size], HEX); break;
 				case PORT_STRX:		data[receive_size] = STRX_Serial.read(); break;
 				case PORT_ADCS:		data[receive_size] = ADCS_Serial.read(); break;
-				case PORT_SF:		data[receive_size] = MSN_Serial.read(); break;
-				case PORT_SUBCAM:	data[receive_size] = MSN_Serial.read(); break;
-				case PORT_AQU:		data[receive_size] = MSN_Serial.read(); break;
 				case PORT_MSN:		data[receive_size] = MSN_Serial.read(); break;// Serial.print(data[receive_size], HEX); Serial.print(" "); break;
 				case PORT_DBG:		data[receive_size] = DEBUG_Serial.read(); break;
 				default:			break;
@@ -112,11 +106,11 @@ void Serial_MUX_init(void)
 	pinMode(PORT_SERIAL_MUX_EN, OUTPUT);
 	digitalWrite(PORT_SERIAL_MUX_EN, HIGH);
 
-	unsigned char port = MUX_MSN1;
+	unsigned char port = MUX_SF;
 	ack i_ret = FRAM_Read_serial_mux(&port);
 	if (Serial_MUX_change((SERIAL_MUX)port) != Success)
 	{
-		serial_mux_enable_port = MUX_MSN1;
+		serial_mux_enable_port = MUX_SF;
 		Serial_MUX_change(serial_mux_enable_port);
 	}
 }
@@ -133,33 +127,33 @@ ack Serial_MUX_change(SERIAL_MUX port)
 		FRAM_Write_serial_mux((SERIAL_MUX)port);//FRAM‚É•Û‘¶
 		return Success;
 	}
-	else if (port == MUX_MSN1)
+	else if (port == MUX_SF)
 	{
 		MSN_Serial.end();
 		MSN_Serial.begin(BITRATE_MSN);
 		digitalWrite(PORT_SERIAL_MUX_A0, HIGH);
 		digitalWrite(PORT_SERIAL_MUX_A1, LOW);
-		serial_mux_enable_port = MUX_MSN1;
+		serial_mux_enable_port = MUX_SF;
 		FRAM_Write_serial_mux((SERIAL_MUX)port);//FRAM‚É•Û‘¶
 		return Success;
 	}
-	else if (port == MUX_MSN2)
+	else if (port == MUX_AQU)
 	{
 		MSN_Serial.end();
 		MSN_Serial.begin(BITRATE_MSN);
 		digitalWrite(PORT_SERIAL_MUX_A0, LOW);
 		digitalWrite(PORT_SERIAL_MUX_A1, HIGH);
-		serial_mux_enable_port = MUX_MSN2;
+		serial_mux_enable_port = MUX_AQU;
 		FRAM_Write_serial_mux((SERIAL_MUX)port);//FRAM‚É•Û‘¶
 		return Success;
 	}
-	else if (port == MUX_CAM)
+	else if (port == MUX_OVCO)
 	{
 		MSN_Serial.end();
 		MSN_Serial.begin(38400);
 		digitalWrite(PORT_SERIAL_MUX_A0, HIGH);
 		digitalWrite(PORT_SERIAL_MUX_A1, HIGH);
-		serial_mux_enable_port = MUX_CAM;
+		serial_mux_enable_port = MUX_OVCO;
 
 		FRAM_Write_serial_mux((SERIAL_MUX)port);//FRAM‚É•Û‘¶
 		return Success;

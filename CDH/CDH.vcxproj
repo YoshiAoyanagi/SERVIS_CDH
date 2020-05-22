@@ -130,6 +130,7 @@
     <ClInclude Include="AppManager.h" />
     <ClInclude Include="AppRegistry.h" />
     <ClInclude Include="AppStatus.h" />
+    <ClInclude Include="AQU_Anomaly_handler.h" />
     <ClInclude Include="BlockCommandDefinisions.h" />
     <ClInclude Include="BlockCommandTable.h" />
     <ClInclude Include="cmd_action.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="AppManager.cpp" />
     <ClCompile Include="AppRegistry.cpp" />
     <ClCompile Include="AppStatus.cpp" />
+    <ClCompile Include="AQU_Anomaly_handler.cpp" />
     <ClCompile Include="BlockCommandDefinisions.cpp" />
     <ClCompile Include="BlockCommandTable.cpp" />
     <ClCompile Include="cmd_action.cpp" />

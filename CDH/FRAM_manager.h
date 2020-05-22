@@ -45,6 +45,9 @@
 #define FRAM_ADDRESS_STRX_OTC_THR			0x002E
 #define FRAM_ADDRESS_STRX_POWER				0x002F
 
+#define FRAM_ADDRESS_PWR_AQU_5V				0x0030
+#define FRAM_ADDRESS_PWR_OVCO_5V			0x0031
+
 ack FRAM_Begin(void);
 ack FRAM_Write(unsigned char *data, unsigned int address);
 

@@ -100,6 +100,21 @@ int Cmd_MSN_5V_POWER(const CTCP* packet)
 	PWR_MSN5V(pwr_onoff);
 	return CMD_ERROR_NONE;
 }
+
+int Cmd_AQU_5V_POWER(const CTCP* packet)
+{
+	unsigned char pwr_onoff = packet->data[CMD_POSITION_PARAM];
+	PWR_AQU_5V(pwr_onoff);
+	return CMD_ERROR_NONE;
+}
+
+int Cmd_OVCO_5V_POWER(const CTCP* packet)
+{
+	unsigned char pwr_onoff = packet->data[CMD_POSITION_PARAM];
+	PWR_OVCO_5V(pwr_onoff);
+	return CMD_ERROR_NONE;
+}
+
 int Cmd_SUBCAM_POWER(const CTCP* packet)
 {
 	unsigned char pwr_onoff = packet->data[CMD_POSITION_PARAM];

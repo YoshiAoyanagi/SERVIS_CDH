@@ -423,6 +423,9 @@
     <ClInclude Include="InitialSL.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="AQU_Anomaly_handler.h">
+      <Filter>ヘッダー ファイル\Applications\UserDefined</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DSPI.cpp">
@@ -658,6 +661,9 @@
     </ClCompile>
     <ClCompile Include="InitialSL.cpp">
       <Filter>ソース ファイル\TaskList\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="AQU_Anomaly_handler.cpp">
+      <Filter>ソース ファイル\Applications\UserDefined</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

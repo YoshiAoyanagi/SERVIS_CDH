@@ -51,8 +51,8 @@ typedef struct
 	unsigned char rw_en;
 	unsigned char imu;
 	unsigned char strx;
-	unsigned char obc_cam;
-	unsigned char obc_led;
+	unsigned char aqu_5v;
+	unsigned char ovco;
 }PWR_STS;
 
 extern PWR_STS	pwr_sts;
@@ -89,6 +89,9 @@ ack		PWR_IMU(unsigned char pwr_onoff);
 ack		PWR_HEATER(unsigned char pwr_onoff);
 
 ack		PWR_STRX(unsigned char pwr_onoff);
+
+ack		PWR_AQU_5V(unsigned char pwr_onoff);
+ack		PWR_OVCO_5V(unsigned char pwr_onoff);
 
 void		PWR_STRX_RESET(void);
 #endif

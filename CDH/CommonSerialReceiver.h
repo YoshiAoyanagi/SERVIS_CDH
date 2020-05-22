@@ -29,9 +29,6 @@ typedef enum
 	PORT_DATA,
 	PORT_STRX,
 	PORT_ADCS,
-	PORT_SF,
-	PORT_SUBCAM,
-	PORT_AQU,
 	PORT_MSN
 } FOWARD_PORT;
 
@@ -39,9 +36,9 @@ typedef enum
 {
 	MUX_NONE	= 0x00,
 	MUX_RPI		= 0x01,
-	MUX_MSN1	= 0x03,
-	MUX_MSN2	= 0x02,
-	MUX_CAM		= 0x04
+	MUX_SF		= 0x02,
+	MUX_AQU		= 0x03,
+	MUX_OVCO	= 0x04
 } SERIAL_MUX;
 
 extern SERIAL_MUX	serial_mux_enable_port;

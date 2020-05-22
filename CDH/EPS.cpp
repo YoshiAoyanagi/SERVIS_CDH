@@ -345,6 +345,35 @@ ack		PWR_STRX(unsigned char pwr_onoff)
 	return i_ret;
 }
 
+ack		PWR_AQU_5V(unsigned char pwr_onoff)
+{
+	PWR_MSN5V(pwr_onoff);
+
+	ack i_ret = PWR_PORT_SET(pwr_onoff, PORT_AQU_5V_PWR);
+	if (i_ret != Error)
+		pwr_sts.aqu_5v = pwr_onoff;
+	else
+		pwr_sts.aqu_5v = PWR_ERROR;
+
+	FRAM_Write_PWR_STS(FRAM_ADDRESS_PWR_AQU_5V, pwr_onoff);
+	return i_ret;
+}
+
+ack		PWR_OVCO_5V(unsigned char pwr_onoff)
+{
+	PWR_MSN5V(pwr_onoff);
+
+	ack i_ret = PWR_PORT_SET(pwr_onoff, PORT_OPT_5V_PWR);
+	if (i_ret != Error)
+		pwr_sts.ovco = pwr_onoff;
+	else
+		pwr_sts.ovco = PWR_ERROR;
+
+	FRAM_Write_PWR_STS(FRAM_ADDRESS_PWR_OVCO_5V, pwr_onoff);
+	return i_ret;
+}
+
+
 void		PWR_STRX_RESET(void)
 {
 

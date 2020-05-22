@@ -210,3 +210,15 @@ CTCP adcs_mode_standby(void)
 	return packet;
 }
 
+CTCP msn_unreg_on(void)
+{
+	unsigned char param[1];
+	param[0] = PWR_ON;
+	return CCP_form_rt_cmd(CODE_Cmd_UNREG_POWER, param, 1u);
+}
+CTCP msn_unreg_off(void)
+{
+	unsigned char param[1];
+	param[0] = PWR_OFF;
+	return CCP_form_rt_cmd(CODE_Cmd_UNREG_POWER, param, 1u);
+}

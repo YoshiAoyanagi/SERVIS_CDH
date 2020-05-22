@@ -61,6 +61,7 @@ typedef enum
   FROM_TO_AQUA 		=	0x01,
   FROM_TO_SF 		=	0x02,
   FROM_TO_SUBCAM 	=	0x03,
+  FROM_TO_OVCO		=	0x06,
   FROM_TO_GS		=	0xFF
 } CCP_FT_ID;
 
@@ -81,10 +82,10 @@ typedef enum
 
 typedef enum
 {
-	CCP_SUBCAM_DATA_ID = 21,
-	CCP_MSN2CAM_DATA_ID = 31,
-	CCP_SF_DATA_ID	   = 33,
-	CCP_OBCAM_DATA_ID = 50,
+	CCP_SUBCAM_DATA_ID	= 21,
+	CCP_AQU_TLM_ID		= 16,
+	CCP_SF_DATA_ID	    = 33,
+	CCP_SF_ROUTING_ID	= 34,
 } CCP_DATA_ID;
 
 typedef struct

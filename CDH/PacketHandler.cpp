@@ -1,6 +1,7 @@
 #include "PacketHandler.h"
 #include "FRAM_TL_CmdDispatcher.h"
 #include "DataRecorderManager.h"
+#include "AQU_Anomaly_handler.h"
 
 PL_Info rt_tlm_list;
 PL_Info tl_cmd_list;
@@ -226,6 +227,8 @@ PH_ACK PH_Cmd_Router(const CTCP* packet)
 		return add_msn_cmd_(packet);
 	case FROM_TO_SUBCAM:
 		return add_msn_cmd_(packet);
+	case FROM_TO_OVCO:
+		return add_msn_cmd_(packet);
 	case FROM_TO_AQUA:
 		return add_msn_cmd_(packet);
 	default:return PH_FORWARDED;
@@ -313,6 +316,12 @@ PH_ACK add_rt_tlm(CTCP* packet)
 		case CCP_SUBCAM_DATA_ID:
 			return PH_FORWARDED;
 		}
+	}
+
+	//ASUì¡ï èàóù
+	if (CCP_get_tlm_id(packet) == CCP_AQU_TLM_ID)
+	{
+		AQU_TlmExtract(packet);
 	}
 
 	PL_ACK ack = PL_push_back(&rt_tlm_list, packet);

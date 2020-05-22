@@ -10,6 +10,7 @@
 static void BC_load_uvc_lv1_action(size_t pos);
 static void BC_load_uvc_lv2_action(size_t pos);
 static void BC_load_uvc_lv3_action(size_t pos);
+static void BC_load_aqu_an_action(size_t pos);
 
 void BC_load_defaults(void)
 {
@@ -26,6 +27,8 @@ void BC_load_defaults(void)
 	BC_load_uvc_lv1_action(BC_UVC_LV1_ACTION);
 	BC_load_uvc_lv2_action(BC_UVC_LV2_ACTION);
 	BC_load_uvc_lv3_action(BC_UVC_LV3_ACTION);
+
+	BC_load_aqu_an_action(BC_AQU_AN_ACTION);
 }
 
 
@@ -84,6 +87,23 @@ static void BC_load_uvc_lv3_action(size_t pos)	//Safe mode, STx OFF, Dur -> 10, 
 
 	temp = cmd_stx_off();
 	CCP_convert_rt_cmd_to_tl_cmd(&temp, OBCT_sec2cycle(21));
+	BCT_register_cmd(&temp);
+
+	BCT_activate_block();
+}
+
+static void BC_load_aqu_an_action(size_t pos)	//
+{
+	CTCP temp;
+
+	BCT_clear_block(pos);
+
+	temp = msn_unreg_off();
+	CCP_convert_rt_cmd_to_tl_cmd(&temp, OBCT_sec2cycle(2));
+	BCT_register_cmd(&temp);
+
+	temp = msn5v_off();
+	CCP_convert_rt_cmd_to_tl_cmd(&temp, OBCT_sec2cycle(8));
 	BCT_register_cmd(&temp);
 
 	BCT_activate_block();

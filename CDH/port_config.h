@@ -20,6 +20,10 @@
 #define PORT_UNREG_ON				89
 #define PORT_UNREG_OFF				90
 
+//OPTIMAL-1
+#define PORT_AQU_5V_PWR				38
+#define PORT_OPT_5V_PWR				34
+
 //AnalogPort for Battery
 #define PORT_AN_BAT1_MON			3
 #define PORT_AN_BAT2_MON			4
@@ -73,10 +77,7 @@
 #define		STRX_IO_REC				5//6
 
 
-//add G-SATELLITE
-#define PORT_STRX_PWR		35
-#define PORT_LED_PWR		8
-#define PORT_OBC_CAM_PWR	34
 
+#define PORT_STRX_PWR		35
 
 #endif

@@ -4,9 +4,9 @@
 #define _ANOMALYLOGGER_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
+#include "arduino.h"
 #else
-	#include "WProgram.h"
+#include "WProgram.h"
 #endif
 
 
@@ -29,7 +29,7 @@ typedef enum
 typedef enum
 {
 	AL_UVC = AL_CORE_GROUP_MAX,
-	AL_EPS
+	AL_AQU
 } AL_GROUP;
 
 typedef enum

@@ -30,8 +30,9 @@ int Cmd_UNREG_POWER(const CTCP* packet);
 int Cmd_POWER_REBOOT(const CTCP* packet);
 
 int Cmd_STRX_POWER(const CTCP* packet);
-int Cmd_OBC_CAM_POWER(const CTCP* packet);
-int Cmd_OBC_LED_POWER(const CTCP* packet);
+
+int Cmd_AQU_5V_POWER(const CTCP* packet);
+int Cmd_OVCO_5V_POWER(const CTCP* packet);
 
 #endif
 

@@ -40,26 +40,13 @@ static void MSN_packet_handler_(void)
 	int i;
 	int i_ret = 0;
 
-	if (serial_mux_enable_port != MUX_CAM)
+	if ((Serial_DataReceive(PORT_MSN, rec_data, &rec_len)) == Success)
 	{
-		if ((Serial_DataReceive(PORT_MSN, rec_data, &rec_len)) == Success)
-		{
-			msn_pei_ = PE_initialize();
-			/*
-			for (i = 0; i < rec_len; i++)
-			{
-				Serial.print(rec_data[i], HEX);
-				Serial.print(" ");
-			}
-			Serial.println(" ");
-			Serial.print("MSN_RECEIVE: ");
-			*/
+		msn_pei_ = PE_initialize();
 
-			if ((i_ret = PH_extract_packet(rec_data, rec_len, &msn_pei_)) == PH_FORWARDED)
-			{
-				DR_PacketWrite(serial_flash_msn, &msn_dr, &msn_pei_.packet);
-			}
-			//Serial.println(i_ret);
+		if ((i_ret = PH_extract_packet(rec_data, rec_len, &msn_pei_)) == PH_FORWARDED)
+		{
+			DR_PacketWrite(serial_flash_msn, &msn_dr, &msn_pei_.packet);
 		}
 	}
 
