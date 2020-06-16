@@ -63,7 +63,7 @@ void IMU_update_init_(void)
 void IMU_update_(void)
 {
 	static unsigned int c;
-	if (c >= (0.5 * OBCT_CYCLES_PER_SEC))
+	if (c >= (0.2 * OBCT_CYCLES_PER_SEC))
 	{
 		IMU_Task();
 		IMU_Process_GYRO_Update();

@@ -45,7 +45,7 @@
 #define			CODE_Cmd_FRAM_REMOVE_BLOCK_AT_POSITION                  0x38			//指定IDの位置のブロックコマンドを消去する
 #define			CODE_Cmd_FRAM_REMOVE_ALL_BLOCK                          0x39			//登録済みのブロックコマンドの情報をすべて消去
 #define			CODE_Cmd_FRAM_REQUEST_BC_INFO                           0x3A			//指定IDのブロックコマンド情報をダウンリンクする
-#define			CODE_Cmd_FRAM_REQUEST_BC_PARAM                          0x3B			//指定ID, 位置のブロックコマンドの実行パケットをダウンリンクする
+#define			CODE_Cmd_FRAM_REQUEST_BC_PARAM                          0x3B			//指定ID, 位置のブロックコマンド情報をダウンリンクする
 #define			CODE_Cmd_STRX_SET_TX_PWR                                0x40			//Power Modeの切り替え
 #define			CODE_Cmd_STRX_OTC_ENABLE                                0x41			//0: DIS, 1:EN
 #define			CODE_Cmd_STRX_OTC_SET_THRESHOLD                         0x42			//Temperature[degC]
@@ -70,9 +70,8 @@
 #define			CODE_Cmd_OBC_MTQ_X                                      0x72			//
 #define			CODE_Cmd_OBC_MTQ_Y                                      0x73			//
 #define			CODE_Cmd_OBC_MTQ_Z                                      0x74			//
-#define			CODE_Cmd_STRX_POWER                                     0x75			//
-#define			CODE_Cmd_OBC_CAM_POWER                                  0x76			//
-#define			CODE_Cmd_OBC_LED_POWER                                  0x77			//
+#define			CODE_Cmd_AQU_5V_POWER                                   0x75			//
+#define			CODE_Cmd_OVCO_5V_POWER                                  0x76			//
 #define			CODE_Cmd_OBC_DR_RECORD                                  0x80			//
 #define			CODE_Cmd_OBC_DR_REPLAY_PARAM_SET                        0x81			//
 #define			CODE_Cmd_OBC_DR_REPLAY                                  0x82			//
@@ -83,5 +82,8 @@
 #define			CODE_Cmd_MSN_DR_ERASE                                   0x87			//
 #define			CODE_Cmd_OBC_DR_INITIALIZE                              0x88			//
 #define			CODE_Cmd_MSN_DR_INITIALIZE                              0x89			//
-#define			CODE_Cmd_OBC_DR_DIRECT_REPLAY                           0x8A			//
-#define			CODE_Cmd_MSN_DR_DIRECT_REPLAY                           0x8B			//
+#define			CODE_Cmd_AQU_ANOMALY_ENABLE                             0x90			//
+#define			CODE_Cmd_AQU_ANOMALY_SET_THR_DIFF_PRESSURE              0x91			//
+#define			CODE_Cmd_AQU_ANOMALY_SET_THR_TEMPERATURE                0x92			//
+#define			CODE_Cmd_AQU_ANOMALY_SET_THR_RV_OPEN_TIME               0x93			//
+#define			CODE_Cmd_AQU_ANOMALY_SET_THR_TV_OPEN_TIME               0x94			//

@@ -55,15 +55,8 @@ void IMU_startup(void)
 }
 void IMU_Task(void)
 {
-	static unsigned int c;
+	imu.Read_All();
 
-	if (c >= 1 * OBCT_CYCLES_PER_SEC)
-	{
-		imu.Read_All();
-
-		c = 0;
-	}
-	c++;
 	return;
 }
 

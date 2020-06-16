@@ -11,7 +11,7 @@ int       CmdTo;
 int       CmdTlmCmd;
 
 
-int cmdExec(const CTCP *packet)
+int cmdExec(const CTCP* packet)
 {
 	CmdCode = CCP_get_cmd_id(packet);
 	CmdCount++;
@@ -497,7 +497,7 @@ int cmdExec(const CTCP *packet)
 	}
 	else if (CmdCode == CODE_Cmd_FRAM_REQUEST_BC_PARAM) {
 		CmdSts = CMD_STATUS_START;
-		CmdErrorSts = Cmd_FRAM_REQUEST_BC_PARAM(packet);	// 指定ID, 位置のブロックコマンドの実行パケットをダウンリンクする
+		CmdErrorSts = Cmd_FRAM_REQUEST_BC_PARAM(packet);	// 指定ID, 位置のブロックコマンド情報をダウンリンクする
 		if (CmdErrorSts == CMD_ERROR_NONE) {
 			CmdSts = CMD_STATUS_END;
 		}
@@ -745,9 +745,19 @@ int cmdExec(const CTCP *packet)
 			CmdSts = CMD_STATUS_ERROR_EXE;
 		}
 	}
-	else if (CmdCode == CODE_Cmd_STRX_POWER) {
+	else if (CmdCode == CODE_Cmd_AQU_5V_POWER) {
 		CmdSts = CMD_STATUS_START;
-		CmdErrorSts = Cmd_STRX_POWER(packet);	// 
+		CmdErrorSts = Cmd_AQU_5V_POWER(packet);	// 
+		if (CmdErrorSts == CMD_ERROR_NONE) {
+			CmdSts = CMD_STATUS_END;
+		}
+		else {
+			CmdSts = CMD_STATUS_ERROR_EXE;
+		}
+	}
+	else if (CmdCode == CODE_Cmd_OVCO_5V_POWER) {
+		CmdSts = CMD_STATUS_START;
+		CmdErrorSts = Cmd_OVCO_5V_POWER(packet);	// 
 		if (CmdErrorSts == CMD_ERROR_NONE) {
 			CmdSts = CMD_STATUS_END;
 		}
@@ -855,15 +865,56 @@ int cmdExec(const CTCP *packet)
 			CmdSts = CMD_STATUS_ERROR_EXE;
 		}
 	}
-	else if (CmdCode == CODE_Cmd_MSN_DR_DIRECT_REPLAY) {
+	else if (CmdCode == CODE_Cmd_AQU_ANOMALY_ENABLE) {
 		CmdSts = CMD_STATUS_START;
-		CmdErrorSts = Cmd_MSN_DR_DIRECT_REPLAY(packet);	// 
+		//CmdErrorSts = Cmd_AQU_ANOMALY_ENABLE(packet);	// 
 		if (CmdErrorSts == CMD_ERROR_NONE) {
 			CmdSts = CMD_STATUS_END;
 		}
 		else {
 			CmdSts = CMD_STATUS_ERROR_EXE;
 		}
+	}
+	else if (CmdCode == CODE_Cmd_AQU_ANOMALY_SET_THR_DIFF_PRESSURE) {
+		CmdSts = CMD_STATUS_START;
+		////CmdErrorSts = Cmd_AQU_ANOMALY_SET_THR_DIFF_PRESSURE(packet);	// 
+		if (CmdErrorSts == CMD_ERROR_NONE) {
+			CmdSts = CMD_STATUS_END;
+		}
+		else {
+			CmdSts = CMD_STATUS_ERROR_EXE;
+		}
+	}
+	else if (CmdCode == CODE_Cmd_AQU_ANOMALY_SET_THR_TEMPERATURE) {
+		CmdSts = CMD_STATUS_START;
+		//CmdErrorSts = Cmd_AQU_ANOMALY_SET_THR_TEMPERATURE(packet);	// 
+		if (CmdErrorSts == CMD_ERROR_NONE) {
+			CmdSts = CMD_STATUS_END;
+		}
+		else {
+			CmdSts = CMD_STATUS_ERROR_EXE;
+		}
+	}
+	else if (CmdCode == CODE_Cmd_AQU_ANOMALY_SET_THR_RV_OPEN_TIME) {
+		CmdSts = CMD_STATUS_START;
+		//CmdErrorSts = Cmd_AQU_ANOMALY_SET_THR_RV_OPEN_TIME(packet);	// 
+		if (CmdErrorSts == CMD_ERROR_NONE) {
+			CmdSts = CMD_STATUS_END;
+		}
+		else {
+			CmdSts = CMD_STATUS_ERROR_EXE;
+		}
+	}
+	else if (CmdCode == CODE_Cmd_AQU_ANOMALY_SET_THR_TV_OPEN_TIME) {
+		CmdSts = CMD_STATUS_START;
+		//CmdErrorSts = Cmd_AQU_ANOMALY_SET_THR_TV_OPEN_TIME(packet);	// 
+		if (CmdErrorSts == CMD_ERROR_NONE) {
+			CmdSts = CMD_STATUS_END;
+		}
+		else {
+			CmdSts = CMD_STATUS_ERROR_EXE;
+		}
+
 
 		//##//##//##//##//##//##//##//##//##//##//##//##//##//##//##//##
 		/*

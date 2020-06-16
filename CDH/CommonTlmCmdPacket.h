@@ -43,7 +43,7 @@
 typedef enum
 {
   TLMCMD_CMD = 0x00,
-  TLMCMD_SC_CMD= SC_CMD_ID,
+  TLMCMD_SC_CMD = SC_CMD_ID,
   TLMCMD_TLM = 0xFF,
   TLMCMD_DR = 0xFE
 } CCP_TC_DSC;

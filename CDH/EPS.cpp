@@ -37,10 +37,21 @@ ack EPS_init(void)
 
 	EPS_SELECT(EPS_SYS_A);
 
-	if (pdu_access_sts == Success || pcu_access_sts == Success)
+	if (pdu_access_sts != Success || pcu_access_sts != Success)
 	{
+		Serial.print("EPS failed: change ch-B");
 		delay(100);
 		EPS_SELECT(EPS_SYS_B);
+	}
+
+	if (pdu_access_sts != Success || pcu_access_sts != Success)
+	{
+		Serial.print("EPS failed: RESET PCU/PDU board");
+		delay(100);
+		EPS_RESET();
+
+		delay(100);
+		EPS_SELECT(EPS_SYS_A);
 	}
 
 	float mv;
@@ -234,7 +245,9 @@ ack		PWR_SAFE_OFF(void)
 ack		PWR_UNREG(unsigned char pwr_onoff)
 {
 	ack i_ret;
+	//i_ret = PWR_PDU_SET(pwr_onoff, UNREG_ON_PORT, UNREG_OFF_PORT);
 	i_ret = PWR_PDU_UNREG_SET(pwr_onoff, UNREG_ON_PORT, UNREG_OFF_PORT);
+	//i_ret = PWR_PDU_UNREG_SET(pwr_onoff, UNREG_ON_PORT, UNREG_OFF_PORT);
 	//i_ret = PWR_UNREG_OBC_SET(pwr_onoff);
 
 	if (i_ret != Error)

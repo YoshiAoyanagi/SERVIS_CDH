@@ -7,14 +7,16 @@
 
 #define CPU_TICKS_PER_SECOND 480 * CPU_TICKS_CORRECT
 
-//#define		UART_DEBUG
-#define		MSG_DEBUG
+#define		UART_DEBUG
+//#define		MSG_DEBUG
 
-#define GSAT
+#define OPTIMAL1
 //#define OTHER_SAT
 
 #ifdef GSAT
 	#define SC_CMD_ID	0x10
+#elif defined OPTIMAL1
+	#define SC_CMD_ID	0x11
 #else
 	#define SC_CMD_ID	0x00
 #endif
